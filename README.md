@@ -26,9 +26,10 @@ elif a == 42:
     c = 'the answer!'
 ```
 
-Notice how, in this example, if `a > 42` then `c` is undefined. To prevent
-such scenarios, include an argument to `when` that does not pair up with a
-predicate to indicate the default value:
+Notice how, in this example, if `a > 42` then `c` is undefined and could cause
+problems down the road when `c` is actually used. To prevent such scenarios,
+include an argument to `when` that does not pair up with a predicate to
+indicate the default value:
 ```python
 c = when(
     a < 4,   'less than 4',
