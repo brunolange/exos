@@ -49,11 +49,11 @@ value = when(
 ```
 
 Either alternative will prevent predicates and values from being evaluated
-if a previously predicate is True.
+if a previously evaluated predicate is True.
 
 ## Error handling
 
-If none of the conditions specified by the predicates are triggered, an
+If none of the conditions specified by the predicates are triggered, a
 `NonExhaustivePattern` exception is thrown.
 
 ```python
