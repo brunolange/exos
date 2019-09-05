@@ -48,7 +48,7 @@ value = when(
 )
 ```
 
-Either alternatively will prevent predicates and values from being evaluated
+Either alternative will prevent predicates and values from being evaluated
 if a previously predicate is True.
 
 ## Error handling
