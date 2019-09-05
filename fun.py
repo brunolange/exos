@@ -15,7 +15,7 @@ class NonExhaustivePattern(Exception):
     """
     pass
 
-def pairs(*args):
+def _pairs(*args):
     def fold(acc, curr):
         if len(acc[-1]) < 2:
             acc[-1].append(curr)
@@ -66,7 +66,7 @@ def when(*args):
         p(otherwise)
     )
     """
-    for predicate, value in pairs(*args):
+    for predicate, value in _pairs(*args):
         predicate = predicate() if callable(predicate) else predicate
         if predicate:
             value = value() if callable(value) else value
