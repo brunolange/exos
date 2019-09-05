@@ -10,6 +10,9 @@ __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
 
 class NonExhaustivePattern(Exception):
+    """
+    Thrown when pattern matching fails to find a matching predicate.
+    """
     pass
 
 def pairs(*args):
@@ -26,6 +29,43 @@ def pairs(*args):
     return payload
 
 def when(*args):
+    """
+    Pattern matching FTW
+    >>> a = 42
+    >>> c = when(
+        a < 4,   'less than 4',
+        a < 10,  'less than 10',
+        a == 42, 'the answer!',
+    )
+    >>> print(c)
+    The answer!
+
+    If you'd like to defer evaluation of either the predicate
+    or the actual value, use a lambda or a partial constructor
+    to emulate laziness.
+    >>> when(
+        condition_1(arg1, arg2), value_1(arg1, arg2),
+        condition_2(arg1, arg2), value_2(),
+        condition_3(),           value_3(arg1),
+        otherwise()
+    )
+    's lazy alternative:
+    >>> import fun
+    >>> fun.when(
+        lambda: condition_1(arg1, arg2), 'a string',
+        lambda: condition_2(arg1, arg2), lambda: value_2(),
+        lambda: condition_3(),           lambda: value_3(arg1),
+        lambda: otherwise()
+    )
+    or, alternatively:
+    >>> from functools import partial as p
+    >>> fun.when(
+        p(condition_1,arg1, arg2),  'a string',
+        p(condition_2,arg1, arg2),  p(value_2),
+        p(condition_3,              p(value_3, arg1),
+        p(otherwise)
+    )
+    """
     for predicate, value in pairs(*args):
         predicate = predicate() if callable(predicate) else predicate
         if predicate:
