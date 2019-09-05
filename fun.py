@@ -9,6 +9,30 @@ __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
 
+class NonExhaustivePattern(Exception):
+    pass
+
+def pairs(*args):
+    def fold(acc, curr):
+        if len(acc[-1]) < 2:
+            acc[-1].append(curr)
+        else:
+            acc.append([curr])
+        return acc
+    payload = reduce(fold, args, [[]])
+    last = payload[-1]
+    if len(last) < 2:
+        last.insert(0, True)
+    return payload
+
+def when(*args):
+    for predicate, value in pairs(*args):
+        predicate = predicate() if callable(predicate) else predicate
+        if predicate:
+            value = value() if callable(value) else value
+            return value
+    raise NonExhaustivePattern()
+
 def each(accept, iterable, *args, **kwargs):
     """
     Applies the accept function to each of the elements in the iterable
