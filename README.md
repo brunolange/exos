@@ -26,6 +26,18 @@ elif a == 42:
     c = 'the answer!'
 ```
 
+Notice how, in this example, if `a > 42` then `c` is undefined. To prevent
+such scenarios, include an argument to `when` that does not pair up with a
+predicate to indicate the default value:
+```python
+c = when(
+    a < 4,   'less than 4',
+    a < 10,  'less than 10',
+    a == 42, 'the answer!',
+    'greater than 42'
+)
+```
+
 ## Lazy evaluation
 
 If you want to defer evaluation of either predicates or values, use a lambda or `functools.partial`.
