@@ -69,8 +69,7 @@ def when(*args):
     for predicate, value in _pairs(*args):
         predicate = predicate() if callable(predicate) else predicate
         if predicate:
-            value = value() if callable(value) else value
-            return value
+            return value() if callable(value) else value
     raise NonExhaustivePattern()
 
 def each(accept, iterable, *args, **kwargs):
