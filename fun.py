@@ -83,7 +83,7 @@ def each(accept, iterable, *args, **kwargs):
         return
 
     _ = (
-        map(accept, iterable) if not kwargs.get('_unpack', False) else
+        [accept(item) for item in iterable] if not kwargs.get('_unpack', False) else
         [accept(*item) for item in iterable]
     )
 
