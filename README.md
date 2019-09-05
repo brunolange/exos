@@ -15,6 +15,16 @@ c = when(
 print(c)
 # the answer!
 ```
+is imperatively equivalent to
+```python
+a = 42
+if a < 42:
+    c = 'less than 4'
+elif a < 10:
+    c = 'less than 10'
+elif a == 42:
+    c = 'the answer!'
+```
 
 ## Lazy evaluation
 
