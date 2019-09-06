@@ -4,6 +4,7 @@ Extended functional tools
 
 from functools import partial, reduce, wraps
 from operator import iconcat
+from inspect import getfullargspec
 
 __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
@@ -136,6 +137,25 @@ def memoize(fn):
             cache[key0][key1] = value
             return value
     return memoized
+
+def curry(fn):
+    """
+    Decorator for currying functions.
+    >>> @curry
+    ... def volume(a, b, c):
+    ...     return a*b*c
+    ...
+    >>> volume(1,2,3) == volume(1)(2)(3) == volume(1,2)(3) == volume(1)(2,3) == 6
+    """
+    _args = getfullargspec(fn).args
+
+    @wraps(fn)
+    def curried(*args, **kwargs):
+        return (
+            fn(*args, **kwargs) if len(_args) - len(args) == 0 else
+            curry(partial(fn, *args, **kwargs))
+        )
+    return curried
 
 def map_attr(attr):
     """
