@@ -2,7 +2,7 @@
 Extended functional tools
 """
 
-from functools import partial, reduce
+from functools import partial, reduce, wraps
 from operator import iconcat
 
 __author__ = 'Bruno Lange'
@@ -106,6 +106,36 @@ def print_each(xs, prefix=''):
     )
 
 flip = lambda f: lambda x, y: f(y, x)
+
+class hashabledict(dict):
+    """
+    Hashable if you can guarantee immutability.
+    Proceed with caution.
+    """
+    def __key(self):
+        return tuple((k,self[k]) for k in sorted(self))
+    def __hash__(self):
+        return hash(self.__key())
+    def __eq__(self, other):
+        return self.__key() == other.__key()
+
+def memoize(fn):
+    """
+    Decorator that provides automatic caching for referentially transparent
+    functions.
+    """
+    cache = fn.cache = {}
+    @wraps(fn)
+    def memoized(*args, **kwargs):
+        key0, key1 = str(args), hashabledict(kwargs) if kwargs else ''
+        try:
+            return cache[key0][key1]
+        except KeyError:
+            value = fn(*args, **kwargs)
+            if key0 not in cache: cache[key0] = {}
+            cache[key0][key1] = value
+            return value
+    return memoized
 
 def map_attr(attr):
     """
