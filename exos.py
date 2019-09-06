@@ -1,5 +1,5 @@
-""" fun.py
-Extended functional tools
+""" exos.py
+EXpressions Over Statements: extended functional tools in Python.
 """
 
 from functools import partial, reduce, wraps

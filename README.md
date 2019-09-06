@@ -1,6 +1,7 @@
-## fun
-### Extending your arsenal of functional tools in Python.
----
+# `exos` | **ex**pressions **o**ver **s**tatements
+
+`exos`: an extension of the functional toolset in Python.
+
 # `when`
 `when` emulates pattern matching.
 
