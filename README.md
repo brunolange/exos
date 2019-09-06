@@ -6,7 +6,7 @@
 `when` emulates pattern matching.
 
 ```python
-from fun import when
+from exos import when
 a = 42
 c = when(
     a < 4,   'less than 4',
@@ -81,7 +81,7 @@ If none of the conditions specified by the predicates are triggered, a
 `NonExhaustivePattern` exception is thrown.
 
 ```python
->>> from fun import when
+>>> from exos import when
 >>> a = 42
 >>> when(
 ...     a < 0, 'a is negative',

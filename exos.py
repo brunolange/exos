@@ -51,8 +51,8 @@ def when(*args):
         otherwise()
     )
     's lazy alternative:
-    >>> import fun
-    >>> fun.when(
+    >>> import exos
+    >>> exos.when(
         lambda: condition_1(arg1, arg2), 'a string',
         lambda: condition_2(arg1, arg2), lambda: value_2(),
         lambda: condition_3(),           lambda: value_3(arg1),
@@ -60,7 +60,7 @@ def when(*args):
     )
     or, alternatively:
     >>> from functools import partial as p
-    >>> fun.when(
+    >>> exos.when(
         p(condition_1,arg1, arg2),  'a string',
         p(condition_2,arg1, arg2),  p(value_2),
         p(condition_3,              p(value_3, arg1),
