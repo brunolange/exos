@@ -93,3 +93,26 @@ Traceback (most recent call last):
 
 fun.NonExhaustivePattern
 >>>
+```
+
+## `each`
+
+`each(accept, iterable, *args, **kwargs)`
+
+`each` applies the accept function to each of the elements in the iterable
+collection.
+
+```python
+>>> from exos import each
+>>> each(lambda x: print('x = {}'.format(x)), range(10))
+x = 0
+x = 1
+x = 2
+x = 3
+x = 4
+x = 5
+x = 6
+x = 7
+x = 8
+x = 9
+```
