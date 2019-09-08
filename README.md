@@ -127,7 +127,7 @@ before applying the accept function.
 ... )
 a -> 42
 b -> 100
->>>
+>>> ueach(print, enumerate(['a', 'b', 'c']))
 0 a
 1 b
 2 c
