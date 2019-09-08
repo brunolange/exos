@@ -104,17 +104,12 @@ collection.
 
 ```python
 >>> from exos import each
->>> each(lambda x: print('x = {}'.format(x)), range(10))
-x = 0
-x = 1
-x = 2
-x = 3
-x = 4
-x = 5
-x = 6
-x = 7
-x = 8
-x = 9
+>>> each(print, range(5))
+0
+1
+2
+3
+4
 ```
 
 ## `ueach`
@@ -132,6 +127,10 @@ before applying the accept function.
 ... )
 a -> 42
 b -> 100
+>>>
+0 a
+1 b
+2 c
 ```
 
 ## `flip`
