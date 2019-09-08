@@ -148,4 +148,7 @@ in which the two first arguments are flipped.
 >>> f = flip(subtract)
 >>> f(10, 3)
 -7
+>>> coord = lambda x, y, z: (x, y, z)
+>>> flip(coord)(1,2,0)
+(2,1,0)
 ```
