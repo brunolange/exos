@@ -5,6 +5,7 @@ EXpressions Over Statements: extended functional tools in Python.
 from functools import partial, reduce, wraps
 from operator import iconcat
 from inspect import getfullargspec
+from collections import defaultdict
 
 __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
@@ -148,17 +149,16 @@ def memoize(fn):
     Decorator that provides automatic caching for referentially transparent
     functions.
     """
-    cache = fn.cache = {}
+    class NotInCache(object):
+        pass
+    cache = fn.cache = defaultdict(lambda: defaultdict(NotInCache))
     @wraps(fn)
     def memoized(*args, **kwargs):
         key0, key1 = str(args), hashabledict(kwargs) if kwargs else ''
-        try:
-            return cache[key0][key1]
-        except KeyError:
-            value = fn(*args, **kwargs)
-            if key0 not in cache: cache[key0] = {}
-            cache[key0][key1] = value
-            return value
+        value = cache[key0][key1]
+        if isinstance(value, NotInCache):
+            value = cache[key0][key1] = fn(*args, **kwargs)
+        return value
     return memoized
 
 def curry(fn):
