@@ -1,8 +1,8 @@
 # `exos` | **ex**pressions **o**ver **s**tatements
 
-`exos`: an extension of the functional toolset in Python.
+exos is a Python module containing varied functional tools.
 
-# `when`
+## `when`
 `when` emulates pattern matching.
 
 ```python
@@ -40,7 +40,7 @@ c = when(
 )
 ```
 
-## Lazy evaluation
+### Lazy evaluation
 
 If you want to defer evaluation of either predicates or values, use a lambda or `functools.partial`.
 
@@ -75,7 +75,7 @@ value = when(
 Either alternative will prevent predicates and values from being evaluated
 if a previously evaluated predicate is True.
 
-## Error handling
+### Error handling
 
 If none of the conditions specified by the predicates are triggered, a
 `NonExhaustivePattern` exception is thrown.
