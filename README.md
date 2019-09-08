@@ -116,3 +116,20 @@ x = 7
 x = 8
 x = 9
 ```
+
+## `ueach`
+
+`ueach(accept, iterable, *args, **kwargs)`
+
+`ueach` is similar to `each` except it unpacks the elements in the collection
+before applying the accept function.
+
+```python
+>>> from exos import ueach
+>>> ueach(
+...     lambda k, v: print('{} -> {}'.format(k, v)),
+...     {'a': 42, 'b': 100}.items()
+... )
+a -> 42
+b -> 100
+```
