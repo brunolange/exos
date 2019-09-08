@@ -186,7 +186,7 @@ def map_method(path, *args, **kwargs):
     `map_method('accountuser_set.filter', is_deleted=False)` is equivalent to
     `lambda account: account.accountuser_set.filter(is_deleted=False)`
     """
-    return lambda x: partial(reduce, getattr, path.split('.'))(x)(*args, **kwargs)
+    return lambda x: map_attr(path)(x)(*args, **kwargs)
 
 def flatten(xs):
     """
