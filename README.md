@@ -133,3 +133,20 @@ before applying the accept function.
 a -> 42
 b -> 100
 ```
+
+## `flip`
+
+`flip(fn)`
+
+`flip` takes a function and returns a new function
+in which the two first arguments are flipped.
+
+```python
+>>> from exos import flip
+>>> subtract = lambda a, b: a - b
+>>> subtract(10, 3)
+7
+>>> f = flip(subtract)
+>>> f(10, 3)
+-7
+```
