@@ -106,7 +106,18 @@ def print_each(xs, prefix=''):
         enumerate(xs)
     )
 
-flip = lambda f: lambda x, y: f(y, x)
+def flip(fn):
+    spec = getfullargspec(fn)
+    arity = len(spec.args) - len(spec.defaults or ())
+    if arity < 2:
+        return fn
+    def flipped(*args, **kwargs):
+        swapped = (args[1], args[0]) + args[2:]
+        return (
+            fn(*swapped, **kwargs) if len(args) == arity else
+            partial(fn, *swapped, **kwargs)
+        )
+    return flipped
 
 class hashabledict(dict):
     """
