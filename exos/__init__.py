@@ -105,3 +105,13 @@ def zip_with_map(mapper, iterable):
     >>> [(1,1), (2,4), (3,9)]
     """
     return zip(iterable, map(mapper, iterable))
+
+def extend(*dicts):
+    """
+    Returns a dictionary that combines all dictionaries passed as arguments
+    without mutating any of them.
+    """
+    def fold(acc, curr):
+        acc.update(curr)
+        return acc
+    return reduce(fold, dicts, {})
