@@ -25,7 +25,9 @@ __all__ = [
     'map_attr',
     'map_method',
     'flatten',
-    'zip_with_map'
+    'zip_with_map',
+    'extend',
+    'reduce_right',
 ]
 
 def when(*args):
@@ -115,3 +117,9 @@ def extend(*dicts):
         acc.update(curr)
         return acc
     return reduce(fold, dicts, {})
+
+def reduce_right(fold, xs, x0):
+    """
+    Right-associative fold of a structure.
+    """
+    return reduce(flip(fold), reversed(xs), x0)
