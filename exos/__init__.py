@@ -30,9 +30,6 @@ __all__ = [
     'reduce_right',
 ]
 
-def match(*args):
-
-
 def when(*args):
     """
     The declarative version of a switch statement.
@@ -126,3 +123,9 @@ def reduce_right(fold, xs, x0):
     Right-associative fold of a structure.
     """
     return reduce(flip(fold), reversed(xs), x0)
+
+def compose(*fns):
+    """
+    Simple function composition.
+    """
+    return reduce_right(lambda curr, acc: lambda x: curr(acc(x)), fns, lambda x: x)
