@@ -28,6 +28,7 @@ __all__ = [
     'zip_with_map',
     'extend',
     'reduce_right',
+    'compose'
 ]
 
 def when(*args):
