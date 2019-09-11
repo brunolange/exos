@@ -30,9 +30,12 @@ __all__ = [
     'reduce_right',
 ]
 
+def match(*args):
+
+
 def when(*args):
     """
-    Pattern matching FTW
+    The declarative version of a switch statement.
     >>> a = 42
     >>> c = when(
         a < 4,   'less than 4',

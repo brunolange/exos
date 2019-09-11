@@ -3,7 +3,7 @@
 exos is a Python module containing varied functional tools.
 
 ## `when`
-`when` emulates pattern matching.
+`when` is the declarative version of a switch statement.
 
 ```python
 from exos import when
