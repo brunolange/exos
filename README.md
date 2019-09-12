@@ -2,6 +2,54 @@
 
 exos is a Python module containing varied functional tools.
 
+## `each`
+
+`each(accept, iterable, *args, **kwargs)`
+
+`each` applies the accept function to each of the elements in the iterable
+collection.
+
+```python
+>>> from exos import each
+>>> each(print, range(5))
+0
+1
+2
+3
+4
+```
+
+## `ueach`
+
+`ueach(accept, iterable, *args, **kwargs)`
+
+`ueach` is similar to `each` except it unpacks the elements in the collection
+before applying the accept function.
+
+```python
+>>> from exos import ueach
+>>> ueach(
+...     lambda k, v: print('{} -> {}'.format(k, v)),
+...     {'a': 42, 'b': 100}.items()
+... )
+a -> 42
+b -> 100
+>>> ueach(print, enumerate(['a', 'b', 'c']))
+0 a
+1 b
+2 c
+```
+
+## `flatten`
+Flattens a nested collection.
+
+```python
+>>> from exos import flatten
+>>> flatten([[1,2,3], [4,5,6]])
+>>> [1, 2, 3, 4, 5, 6]
+```
+
+
 ## `when`
 `when` is the declarative version of a switch statement.
 
@@ -93,44 +141,6 @@ Traceback (most recent call last):
 
 fun.NonExhaustivePattern
 >>>
-```
-
-## `each`
-
-`each(accept, iterable, *args, **kwargs)`
-
-`each` applies the accept function to each of the elements in the iterable
-collection.
-
-```python
->>> from exos import each
->>> each(print, range(5))
-0
-1
-2
-3
-4
-```
-
-## `ueach`
-
-`ueach(accept, iterable, *args, **kwargs)`
-
-`ueach` is similar to `each` except it unpacks the elements in the collection
-before applying the accept function.
-
-```python
->>> from exos import ueach
->>> ueach(
-...     lambda k, v: print('{} -> {}'.format(k, v)),
-...     {'a': 42, 'b': 100}.items()
-... )
-a -> 42
-b -> 100
->>> ueach(print, enumerate(['a', 'b', 'c']))
-0 a
-1 b
-2 c
 ```
 
 ## `flip`
