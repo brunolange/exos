@@ -1,7 +1,7 @@
 import unittest
 from functools import reduce, partial
 import math
-from exos import compose
+from exos import compose, pipe
 
 class TestCompose(unittest.TestCase):
     def test_compose(self):
@@ -33,3 +33,13 @@ class TestCompose(unittest.TestCase):
 
         digits = compose(lambda number: [int(digit) for digit in number.split('.')], s)
         self.assertEqual(digits(12, 625), [1, 0])
+
+    def test_pipe(self):
+        def f(x, y, bias=0):
+            return 2*x - math.sqrt(y) + bias
+        def g(x):
+            return -x
+
+        h = compose(g, f)
+        p = pipe(f, g)
+        self.assertTrue(h(5, 144) == p(5, 144))
