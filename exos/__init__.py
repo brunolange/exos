@@ -130,13 +130,19 @@ identity = lambda x: x
 class Identity:
     pass
 
+_compose = lambda f, g: (
+    f if g is Identity else
+    lambda *args, **kwargs: f(g(*args, **kwargs))
+)
+
 def compose(*fns):
     """
     Simple function composition.
     """
-    def fold(curr, acc):
-        if acc is Identity:
-            return curr
+    return reduce_right(_compose, fns, Identity)
 
-        return lambda *args, **kwargs: curr(acc(*args, **kwargs))
-    return reduce_right(fold, fns, Identity)
+def pipe(*fns):
+    """
+    Left-to-right composition, Unix style.
+    """
+    return reduce(flip(_compose), fns, Identity)
