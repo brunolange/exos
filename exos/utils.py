@@ -15,11 +15,7 @@ def pairs(*args):
         else:
             acc.append([curr])
         return acc
-    payload = reduce(fold, args, [[]])
-    last = payload[-1]
-    if len(last) < 2:
-        last.insert(0, True)
-    return payload
+    return reduce(fold, args, [[]])
 
 class hashabledict(dict):
     """
@@ -46,6 +42,9 @@ class hashabledict(dict):
 
     def __eq__(self, other):
         return self.__key() == other.__key()
+
+class Identity:
+    pass
 
 class NotInCache(object):
     pass

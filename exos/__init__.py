@@ -9,7 +9,7 @@ from collections import defaultdict
 from .io import each, ueach, print_each
 from .decorators import curry, memoize
 from .exceptions import NonExhaustivePattern
-from .utils import pairs
+from .utils import pairs, Identity
 
 __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
@@ -28,7 +28,8 @@ __all__ = [
     'zip_with_map',
     'extend',
     'reduce_right',
-    'compose'
+    'compose',
+    'pipe'
 ]
 
 def when(*args):
@@ -47,7 +48,12 @@ def when(*args):
     or the actual value, use a lambda or a partial constructor
     to emulate laziness.
     """
-    for predicate, value in pairs(*args):
+    _pairs = pairs(*args)
+    last = _pairs[-1]
+    if len(last) < 2:
+        last.insert(0, True)
+
+    for predicate, value in _pairs:
         predicate = predicate() if callable(predicate) else predicate
         if predicate:
             return value() if callable(value) else value
@@ -125,11 +131,7 @@ def reduce_right(fold, xs, x0):
     """
     return reduce(flip(fold), reversed(xs), x0)
 
-identity = lambda x: x
-
-class Identity:
-    pass
-
+_identity = lambda x: x
 _compose = lambda f, g: (
     f if g is Identity else
     lambda *args, **kwargs: f(g(*args, **kwargs))
