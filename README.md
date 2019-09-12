@@ -49,7 +49,6 @@ Flattens a nested collection.
 >>> [1, 2, 3, 4, 5, 6]
 ```
 
-
 ## `when`
 `when` is the declarative version of a switch statement.
 
