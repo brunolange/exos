@@ -125,8 +125,18 @@ def reduce_right(fold, xs, x0):
     """
     return reduce(flip(fold), reversed(xs), x0)
 
+identity = lambda x: x
+
+class Identity:
+    pass
+
 def compose(*fns):
     """
     Simple function composition.
     """
-    return reduce_right(lambda curr, acc: lambda x: curr(acc(x)), fns, lambda x: x)
+    def fold(curr, acc):
+        if acc is Identity:
+            return curr
+
+        return lambda *args, **kwargs: curr(acc(*args, **kwargs))
+    return reduce_right(fold, fns, Identity)
