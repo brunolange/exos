@@ -2,6 +2,29 @@
 
 exos is a Python module containing varied functional tools.
 
+## `memoize`
+
+Decorate your referentially transparent functions with `memoize` to setup
+automatic caching.
+
+```python
+>>> from exos import memoize
+>>> import timeit
+>>> def fibo1(n):
+...     return 1 if n <= 2 else fibo1(n-1) + fibo1(n-2)
+...
+>>> @memoize
+>>> def fibo2(n):
+...     return 1 if n <= 2 else fibo2(n-1) + fibo2(n-2)
+...
+>>> timeit.repeat("fibo1(30)", "from __main__ import fibo1", number=3)
+[8.696023122000042, 8.712087763, 8.689468796000256]
+>>> # well, that took a while
+>>> timeit.repeat("fibo2(30)", "from __main__ import fibo2", number=3)
+[4.720499964605551e-05, 8.240000170189887e-06, 7.680000180698698e-06]
+>>> # that didn't
+```
+
 ## `each`
 
 `each(accept, iterable, *args, **kwargs)`
