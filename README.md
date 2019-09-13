@@ -136,9 +136,9 @@ If none of the conditions specified by the predicates are triggered, a
 ... )
 Traceback (most recent call last):
   File "<stdin>", line 1, in <module>
-  File "/Users/blangera/dev/fun/fun.py", line 75, in when
+  File "/Users/blangera/dev/exos/exos.py", line 75, in when
 
-fun.NonExhaustivePattern
+exos.NonExhaustivePattern
 >>>
 ```
 
