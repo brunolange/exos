@@ -44,10 +44,38 @@ TypeError: volume() missing 1 required positional argument: 'depth'
 >>> @curry
 ... def volume(height, width, depth):
 ...     return height * width * depth
+...
+>>> volume(2, 3)
+>>> <function curry.<locals>.curried at 0x102920e18>
 >>> volume(1,2,3) == volume(1)(2)(3) == volume(1,2)(3) == volume(1)(2,3) == 6
 True
 >>> list(map(volume(0.5, 2.25), range(1, 10)))
 [1.125, 2.25, 3.375, 4.5, 5.625, 6.75, 7.875, 9.0, 10.125]
+```
+
+## `compose`
+
+Simple function composition.
+
+```python
+>>> from exos import compose
+>>> f = lambda x: x**2
+>>> g = lambda x: -x
+>>> w = compose(f, g) # w(x) = f . g = f(g(x))
+>>> h = compose(g, f) # h(x) = g . f = g(f(x))
+>>> f(3)
+9
+>>> h(3)
+-9
+```
+
+## `pipe`
+
+Function composition, Unix-style.
+
+>>> from exos import compose
+>>> pipe(lambda s: s.upper(), print)('hello world!')
+HELLO WORLD!
 ```
 
 ## `each`
