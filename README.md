@@ -63,7 +63,7 @@ Simple function composition.
 >>> g = lambda x: -x
 >>> w = compose(f, g) # w(x) = f . g = f(g(x))
 >>> h = compose(g, f) # h(x) = g . f = g(f(x))
->>> f(3)
+>>> w(3)
 9
 >>> h(3)
 -9
