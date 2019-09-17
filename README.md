@@ -73,6 +73,7 @@ Simple function composition.
 
 Function composition, Unix-style.
 
+```python
 >>> from exos import compose
 >>> pipe(lambda s: s.upper(), print)('hello world!')
 HELLO WORLD!
