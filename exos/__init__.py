@@ -26,6 +26,7 @@ __all__ = [
     'map_method',
     'flatten',
     'zip_with_map',
+    'zip_with_attr',
     'extend',
     'reduce_right',
     'compose',
@@ -114,6 +115,16 @@ def zip_with_map(mapper, iterable):
     >>> [(1,1), (2,4), (3,9)]
     """
     return zip(iterable, map(mapper, iterable))
+
+def zip_with_attr(attr, iterable):
+    """
+    Zips collection of objects with instance attribute
+
+    zip(cars, (car.price for car in cars))
+    <=>
+    zip_with_attr(cars, 'price')
+    """
+    return zip(iterable, (getattr(item, attr) for item in iterable))
 
 def extend(*dicts):
     """
