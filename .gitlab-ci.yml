@@ -1,0 +1,9 @@
+image: python:3.6
+
+stages:
+  - test
+
+tests:
+  stage: test
+  script:
+  - python3 -m unittest discover test
