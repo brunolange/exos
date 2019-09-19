@@ -1,10 +1,34 @@
-# `exos` | **ex**pressions **o**ver **s**tatements
+# `exos` | expressions over statements
 
 exos is a Python module containing varied functional tools.
 
-## `memoize`
+## Installation
 
-Decorate your referentially transparent functions with `memoize` to setup
+`exos` is compatible with Python 3. Install it with `pip`:
+
+```bash
+$ pip install exos
+```
+
+## Documentation
+
+### `memoize`
+
+In functional programming lingo, *referential transparency* is a term that refers
+to expressions that can be replaced with their value without altering the program's
+behavior. For that to be the case, referentially transparent functions need to be
+*pure*, that is, they must always produce the same output when given then same
+inputs and they cannot have any effects on the outside world. In other words,
+they have no *side effects*.
+
+Functions that fit this bill can benefit from a performance optimization technique
+known as *memoization*. Since pure functions always return the same output given
+the same inputs and have no effect on the outside world, by storing calculated values
+in a lookup table, whenever a function gets called on reoccurring inputs we can simply
+look up the previously calculated value instead of performing a potentially costly
+calculation again.
+
+`exos` provides a function decorator aptly called `memoize` which sets up this
 automatic caching.
 
 ```python
@@ -25,9 +49,9 @@ automatic caching.
 >>> # that didn't
 ```
 
-## `curry`
+### `curry`
 
-The bread and butter of functional programming, currying allows you to provide
+The bread and butter of functional programming, *currying* allows you to provide
 a function with an incomplete set of arguments, getting in return a partially
 applied function.
 
@@ -53,7 +77,7 @@ True
 [1.125, 2.25, 3.375, 4.5, 5.625, 6.75, 7.875, 9.0, 10.125]
 ```
 
-## `compose`
+### `compose`
 
 Simple function composition.
 
@@ -69,7 +93,7 @@ Simple function composition.
 -9
 ```
 
-## `pipe`
+### `pipe`
 
 Function composition, Unix-style.
 
@@ -79,7 +103,7 @@ Function composition, Unix-style.
 HELLO WORLD!
 ```
 
-## `each`
+### `each`
 
 `each(accept, iterable, *args, **kwargs)`
 
@@ -96,7 +120,7 @@ collection.
 4
 ```
 
-## `ueach`
+### `ueach`
 
 `ueach(accept, iterable, *args, **kwargs)`
 
@@ -117,7 +141,7 @@ b -> 100
 2 c
 ```
 
-## `flatten`
+### `flatten`
 Flattens a nested collection.
 
 ```python
@@ -126,7 +150,7 @@ Flattens a nested collection.
 >>> [1, 2, 3, 4, 5, 6]
 ```
 
-## `when`
+### `when`
 `when` is the declarative version of a switch statement.
 
 ```python
@@ -164,7 +188,7 @@ c = when(
 )
 ```
 
-### Lazy evaluation
+#### Lazy evaluation
 
 If you want to defer evaluation of either predicates or values, use a lambda or `functools.partial`.
 
@@ -199,7 +223,7 @@ value = when(
 Either alternative will prevent predicates and values from being evaluated
 if a previously evaluated predicate is True.
 
-### Error handling
+#### Error handling
 
 If none of the conditions specified by the predicates are triggered, a
 `NonExhaustivePattern` exception is thrown.
@@ -219,7 +243,7 @@ exos.NonExhaustivePattern
 >>>
 ```
 
-## `flip`
+### `flip`
 
 `flip(fn)`
 
