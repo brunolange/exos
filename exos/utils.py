@@ -8,6 +8,7 @@ __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
 
+
 def pairs(*args):
     def fold(acc, curr):
         if len(acc[-1]) < 2:
@@ -16,6 +17,7 @@ def pairs(*args):
             acc.append([curr])
         return acc
     return reduce(fold, args, [[]])
+
 
 class hashabledict(dict):
     """
@@ -43,8 +45,10 @@ class hashabledict(dict):
     def __eq__(self, other):
         return self.__key() == other.__key()
 
+
 class Identity:
     pass
+
 
 class NotInCache(object):
     pass

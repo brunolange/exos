@@ -6,6 +6,7 @@ __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
 
+
 def each(accept, iterable, *args, **kwargs):
     """
     Applies the accept function to each of the elements in the iterable
@@ -21,12 +22,14 @@ def each(accept, iterable, *args, **kwargs):
         [accept(*item) for item in iterable]
     )
 
+
 def ueach(accept, iterable, *args, **kwargs):
     """
     Unpacks elements in the collection before applying the accept function.
     """
     kwargs['_unpack'] = True
     each(accept, iterable, *args, **kwargs)
+
 
 def print_each(xs, prefix=''):
     """

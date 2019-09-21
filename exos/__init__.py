@@ -2,10 +2,9 @@
 EXpressions Over Statements: extended functional tools in Python.
 """
 
-from functools import partial, reduce, wraps
+from functools import partial, reduce
 from operator import iconcat
 from inspect import getfullargspec
-from collections import defaultdict
 from .io import each, ueach, print_each
 from .decorators import curry, memoize
 from .exceptions import NonExhaustivePattern
@@ -32,6 +31,7 @@ __all__ = [
     'compose',
     'pipe'
 ]
+
 
 def when(*args):
     """
@@ -60,11 +60,13 @@ def when(*args):
             return value() if callable(value) else value
     raise NonExhaustivePattern()
 
+
 def flip(fn):
     spec = getfullargspec(fn)
     arity = len(spec.args) - len(spec.defaults or ())
     if arity < 2:
         return fn
+
     def flipped(*args, **kwargs):
         swapped = (args[1], args[0]) + args[2:]
         return (
@@ -72,6 +74,7 @@ def flip(fn):
             partial(fn, *swapped, **kwargs)
         )
     return flipped
+
 
 def map_attr(attr):
     """
@@ -83,6 +86,7 @@ def map_attr(attr):
     # there's no need to flip because of the order of arguments in the reduce function
     return partial(reduce, getattr, attr.split('.'))
 
+
 def map_method(path, *args, **kwargs):
     """
     Returns a mapper function that runs the path method for each instance of
@@ -92,6 +96,7 @@ def map_method(path, *args, **kwargs):
     `lambda account: account.accountuser_set.filter(is_deleted=False)`
     """
     return lambda x: map_attr(path)(x)(*args, **kwargs)
+
 
 def flatten(xs):
     """
@@ -103,6 +108,7 @@ def flatten(xs):
     >>> [10, 55]
     """
     return reduce(iconcat, xs, [])
+
 
 def zip_with_map(mapper, iterable):
     """
@@ -116,6 +122,7 @@ def zip_with_map(mapper, iterable):
     """
     return zip(iterable, map(mapper, iterable))
 
+
 def zip_with_attr(attr, iterable):
     """
     Zips collection of objects with instance attribute
@@ -125,6 +132,7 @@ def zip_with_attr(attr, iterable):
     zip_with_attr(cars, 'price')
     """
     return zip(iterable, (getattr(item, attr) for item in iterable))
+
 
 def extend(*dicts):
     """
@@ -136,11 +144,13 @@ def extend(*dicts):
         return acc
     return reduce(fold, dicts, {})
 
+
 def reduce_right(fold, xs, x0):
     """
     Right-associative fold of a structure.
     """
     return reduce(flip(fold), reversed(xs), x0)
+
 
 _identity = lambda x: x
 _compose = lambda f, g: (
@@ -148,11 +158,13 @@ _compose = lambda f, g: (
     lambda *args, **kwargs: f(g(*args, **kwargs))
 )
 
+
 def compose(*fns):
     """
     Simple function composition.
     """
     return reduce_right(_compose, fns, Identity)
+
 
 def pipe(*fns):
     """

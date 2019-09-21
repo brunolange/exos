@@ -11,6 +11,7 @@ from inspect import getfullargspec
 from collections import defaultdict
 from .utils import hashabledict, NotInCache
 
+
 def curry(fn):
     """
     Decorator for currying functions.
