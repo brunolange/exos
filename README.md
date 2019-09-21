@@ -247,8 +247,8 @@ exos.NonExhaustivePattern
 
 `flip(fn)`
 
-`flip` takes a function and returns a new function
-in which the two first arguments are flipped.
+`flip` takes a function and returns a new function for which the first two
+arguments are flipped.
 
 ```python
 >>> from exos import flip
@@ -261,4 +261,8 @@ in which the two first arguments are flipped.
 >>> coord = lambda x, y, z: (x, y, z)
 >>> flip(coord)(1,2,0)
 (2,1,0)
+>>> from functools import partial
+>>> is_string = lambda value: isinstance(value, str)
+>>> # can be rewritten as
+>>> is_string = partial(flip(isinstance), str)
 ```
