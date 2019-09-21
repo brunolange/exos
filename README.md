@@ -130,11 +130,11 @@ before applying the accept function.
 ```python
 >>> from exos import ueach
 >>> ueach(
-...     lambda k, v: print('{} -> {}'.format(k, v)),
+...     lambda k, v: print('{} >=> {}'.format(k, v)),
 ...     {'a': 42, 'b': 100}.items()
 ... )
-a -> 42
-b -> 100
+a >=> 42
+b >=> 100
 >>> ueach(print, enumerate(['a', 'b', 'c']))
 0 a
 1 b
