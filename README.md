@@ -261,8 +261,14 @@ arguments are flipped.
 >>> coord = lambda x, y, z: (x, y, z)
 >>> flip(coord)(1,2,0)
 (2,1,0)
+```
+
+```python
 >>> from functools import partial
->>> is_string = lambda value: isinstance(value, str)
->>> # can be rewritten as
+>>> from exos import flip, each
 >>> is_string = partial(flip(isinstance), str)
+>>> each(print, filter(is_string, ['forty two', 42, True, '', 'done']))
+forty two
+
+done
 ```
