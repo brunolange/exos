@@ -50,5 +50,5 @@ class Identity:
     pass
 
 
-class NotInCache(object):
+class NotInCache:
     pass
