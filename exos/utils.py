@@ -44,11 +44,3 @@ class hashabledict(dict):
 
     def __eq__(self, other):
         return self.__key() == other.__key()
-
-
-class Identity:
-    pass
-
-
-class NotInCache:
-    pass

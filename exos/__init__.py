@@ -8,7 +8,7 @@ from inspect import getfullargspec
 from .io import each, ueach, print_each
 from .decorators import curry, memoize
 from .exceptions import NonExhaustivePattern
-from .utils import pairs, Identity
+from .utils import pairs
 
 __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
@@ -152,7 +152,13 @@ def reduce_right(fold, xs, x0):
     return reduce(flip(fold), reversed(xs), x0)
 
 
-_identity = lambda x: x
+class Identity:
+    """Utility class for the composition function.
+    Acts as a placeholder for the initial value for the reduction functions
+    """
+    pass
+
+
 _compose = lambda f, g: (
     f if g is Identity else
     lambda *args, **kwargs: f(g(*args, **kwargs))
