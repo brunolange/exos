@@ -80,10 +80,9 @@ def map_attr(attr):
     """
     Returns a mapper function for attribute extraction
 
-    map_attr('auth_user') <=> lambda account_user: account_user.auth_user
-    map_attr('auth_user.email') <=> lambda account_user: account_user.auth_user.email
+    map_attr('user') <=> lambda account: account.user
+    map_attr('user.email') <=> lambda account: account.user.email
     """
-    # there's no need to flip because of the order of arguments in the reduce function
     return partial(reduce, getattr, attr.split('.'))
 
 
@@ -92,8 +91,13 @@ def map_method(path, *args, **kwargs):
     Returns a mapper function that runs the path method for each instance of
     the iterable collection.
 
-    `map_method('accountuser_set.filter', is_deleted=False)` is equivalent to
-    `lambda account: account.accountuser_set.filter(is_deleted=False)`
+    map_method('start')
+    <=>
+    lambda thread: thread.start()
+
+    map_method('book_set.filter', number_of_pages__gte=100)
+    <=>
+    lambda author: author.book_set.filter(number_of_pages__gte=100)
     """
     return lambda x: map_attr(path)(x)(*args, **kwargs)
 
