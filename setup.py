@@ -10,7 +10,7 @@ __license__ = 'MIT'
 
 setup(
     name='exos',
-    version='0.1.1',
+    version='0.2',
     packages=['exos',],
     description='EXpressions Over Statements: additional functional tools in Python!',
     author='Bruno Lange',
