@@ -21,7 +21,9 @@ __all__ = [
     'memoize',
     'when',
     'flip',
+    'mattr',
     'map_attr',
+    'mmethod',
     'map_method',
     'flatten',
     'zip_with_map',
@@ -76,30 +78,42 @@ def flip(fn):
     return flipped
 
 
-def map_attr(attr):
+def mattr(attr):
     """
     Returns a mapper function for attribute extraction
 
-    map_attr('user') <=> lambda account: account.user
-    map_attr('user.email') <=> lambda account: account.user.email
+    mattr('user') <=> lambda account: account.user
+    mattr('user.email') <=> lambda account: account.user.email
     """
     return partial(reduce, getattr, attr.split('.'))
 
+def map_attr(attr, iterable):
+    """
+    Returns a map object where each item corresponds to the extracted
+    attribute given by `attr` from the original object in the iterable
+    collection.
+    """
+    return map(mattr(attr), iterable)
 
-def map_method(path, *args, **kwargs):
+
+def mmethod(path, *args, **kwargs):
     """
     Returns a mapper function that runs the path method for each instance of
     the iterable collection.
 
-    map_method('start')
+    mmethod('start')
     <=>
     lambda thread: thread.start()
 
-    map_method('book_set.filter', number_of_pages__gte=100)
+    mmethod('book_set.filter', number_of_pages__gte=100)
     <=>
     lambda author: author.book_set.filter(number_of_pages__gte=100)
     """
-    return lambda x: map_attr(path)(x)(*args, **kwargs)
+    return lambda x: mattr(path)(x)(*args, **kwargs)
+
+
+def map_method(path, iterable):
+    return map(mmethod(path), iterable)
 
 
 def flatten(xs):
