@@ -141,7 +141,7 @@ def zip_with_map(mapper, iterable):
     return zip(iterable, map(mapper, iterable))
 
 
-def zip_with_attr(attr, iterable):
+def zip_with_attr(iterable, *attrs):
     """
     Zips collection of objects with instance attribute
 
@@ -149,7 +149,11 @@ def zip_with_attr(attr, iterable):
     <=>
     zip_with_attr(cars, 'price')
     """
-    return zip(iterable, (getattr(item, attr) for item in iterable))
+
+    return zip(iterable, *(
+        [reduce(getattr, attr.split('.'), item) for item in iterable]
+        for attr in attrs
+    ))
 
 
 def extend(*dicts):
