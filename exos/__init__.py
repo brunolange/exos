@@ -25,6 +25,7 @@ __all__ = [
     'map_attr',
     'mmethod',
     'map_method',
+    'xattr',
     'flatten',
     'zip_with_map',
     'zip_with_attr',
@@ -86,6 +87,35 @@ def mattr(attr):
     mattr('user.email') <=> lambda account: account.user.email
     """
     return partial(reduce, getattr, attr.split('.'))
+
+
+class XAttrNoDefault:
+    pass
+
+
+def xattr(obj, *attr, default=XAttrNoDefault):
+    """
+    Similar to getattr except it allows for deep extraction
+    of attributes by splitting them with a dot or by passing
+    multiple arguments.
+
+    >>> xattr(matrix, 'rank') # same as getattr(matrix, 'rank') or matrix.rank
+    4
+    >>> xattr(wave, 'amplitude.imag')
+    1.618
+    >>> xattr(wave, 'amplitude', 'imag')
+    1.618
+    """
+    attrs = flatten(a.split('.') for a in attr)
+    if default is XAttrNoDefault:
+        return reduce(getattr, attrs, obj)
+
+    return reduce(
+        lambda acc, curr: getattr(acc, curr, default),
+        attrs,
+        obj
+    )
+
 
 def map_attr(attr, iterable):
     """
@@ -199,3 +229,4 @@ def pipe(*fns):
     Left-to-right composition, Unix style.
     """
     return reduce(flip(_compose), fns, Identity)
+
