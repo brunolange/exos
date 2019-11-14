@@ -93,20 +93,17 @@ class XAttrNoDefault:
     pass
 
 
-def xattr(obj, *attr, default=XAttrNoDefault):
+def xattr(obj, attr, default=XAttrNoDefault):
     """
     Similar to getattr except it allows for deep extraction
-    of attributes by splitting them with a dot or by passing
-    multiple arguments.
+    of attributes by splitting them with a dot.
 
     >>> xattr(matrix, 'rank') # same as getattr(matrix, 'rank') or matrix.rank
     4
     >>> xattr(wave, 'amplitude.imag')
     1.618
-    >>> xattr(wave, 'amplitude', 'imag')
-    1.618
     """
-    attrs = flatten(a.split('.') for a in attr)
+    attrs = attr.split('.')
     if default is XAttrNoDefault:
         return reduce(getattr, attrs, obj)
 

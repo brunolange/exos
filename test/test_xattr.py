@@ -17,3 +17,11 @@ class TestXAttr(unittest.TestCase):
         self.assertTrue(isinstance(xattr(B(A('hello'), None), 'a'), A))
         self.assertEqual(xattr(B(A('hello'), 31), 'a.a'), 'hello')
         self.assertEqual(xattr(B(A('hello'), 31), 'b'), 31)
+
+        with self.assertRaises(AttributeError):
+            _ = xattr(None, 'b')
+
+        with self.assertRaises(AttributeError):
+            _ = xattr(A(None), 'b')
+
+        self.assertEqual(xattr(None, 'a', 42), 42)
