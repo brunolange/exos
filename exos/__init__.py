@@ -65,6 +65,19 @@ def when(*args):
 
 
 def flip(fn):
+    """
+    Takes a function that takes two or more positional parameters
+    and returns another one where the first two positional parameters
+    are flipped.
+
+    >>> def statement(a, b):
+    ...     print("I'm {} if and only if I'm {}.".format(a, b))
+    ...
+    >>> statement('alive', 'breathing')
+    I'm alive if and only if I'm breathing.
+    >>> flip(statement)('alive', 'breathing')
+    I'm breathing if and only if I'm alive.
+    """
     spec = getfullargspec(fn)
     arity = len(spec.args) - len(spec.defaults or ())
     if arity < 2:
@@ -96,7 +109,9 @@ class XAttrNoDefault:
 def xattr(obj, attr, default=XAttrNoDefault):
     """
     Similar to getattr except it allows for deep extraction
-    of attributes by splitting them with a dot.
+    of attributes by splitting them with a dot. Unless a
+    default value is provided, an AttributeError exception
+    is thrown when the attribute does not exist.
 
     >>> xattr(matrix, 'rank') # same as getattr(matrix, 'rank') or matrix.rank
     4
