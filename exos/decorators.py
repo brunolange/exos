@@ -53,3 +53,18 @@ def memoize(fn):
             value = cache[key0][key1] = fn(*args, **kwargs)
         return value
     return memoized
+
+
+def fattr(key, value):
+    """Decorator for function attributes
+
+    >>> @fattr('key', 42)
+    ... def f():
+    ...     pass
+    >>> f.key
+    42
+    """
+    def wrapper(fn):
+        setattr(fn, key, value)
+        return fn
+    return wrapper
