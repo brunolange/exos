@@ -97,13 +97,9 @@ def xattr(obj, attr, default=XAttrNoDefault):
     >>> xattr(wave, 'amplitude.imag')
     1.618
     """
-    attrs = attr.split('.')
-    if default is XAttrNoDefault:
-        return reduce(getattr, attrs, obj)
-
     return reduce(
-        lambda acc, curr: getattr(acc, curr, default),
-        attrs,
+        getattr if default is XAttrNoDefault else lambda acc, curr: getattr(acc, curr, default),
+        attr.split('.'),
         obj
     )
 
