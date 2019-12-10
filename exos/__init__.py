@@ -13,27 +13,6 @@ from .utils import pairs
 __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
-__all__ = [
-    'each',
-    'ueach',
-    'print_each',
-    'curry',
-    'memoize',
-    'when',
-    'flip',
-    'mattr',
-    'map_attr',
-    'mmethod',
-    'map_method',
-    'xattr',
-    'flatten',
-    'zip_with_map',
-    'zip_with_attr',
-    'extend',
-    'reduce_right',
-    'compose',
-    'pipe'
-]
 
 
 def when(*args):
