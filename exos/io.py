@@ -39,3 +39,9 @@ def print_each(xs, prefix=''):
         lambda i, x: print('{}{}'.format(prefix.format(i=i), x)),
         enumerate(xs)
     )
+
+def peach(xs, prefix=''):
+    """
+    A shortcut to print_each
+    """
+    return print_each(xs, prefix=prefix=)

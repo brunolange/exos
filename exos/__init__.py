@@ -5,7 +5,7 @@ EXpressions Over Statements: extended functional tools in Python.
 from functools import partial, reduce
 from operator import iconcat
 from inspect import getfullargspec
-from .io import each, ueach, print_each
+from .io import each, ueach, print_each, peach
 from .decorators import curry, memoize
 from .exceptions import NonExhaustivePattern
 from .utils import pairs
