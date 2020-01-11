@@ -17,7 +17,7 @@ __license__ = 'MIT'
 
 def when(*args):
     """
-    The declarative version of a switch statement.
+    A declarative approach to a switch statement.
     >>> a = 42
     >>> c = when(
         a < 4,   'less than 4',
