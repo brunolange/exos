@@ -36,6 +36,6 @@ def print_each(xs, prefix=''):
     Prints each element in the collection given by xs.
     """
     return ueach(
-        lambda i, x: print('{}{}'.format(prefix, x).format(i=i)),
+        lambda i, x: print('{}{}'.format(prefix.format(i=i), x)),
         enumerate(xs)
     )
