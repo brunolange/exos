@@ -121,6 +121,15 @@ collection.
 4
 ```
 
+A handy shortcut to `partial(each, print)` is the `peach` function:
+
+```python
+>>> from exos import peach
+>>> peach(['hello', 'new line'])
+hello
+new line
+```
+
 ### `ueach`
 
 `ueach(accept, iterable, *args, **kwargs)`
