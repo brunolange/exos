@@ -275,9 +275,9 @@ arguments are flipped.
 
 ```python
 >>> from functools import partial
->>> from exos import flip, each
+>>> from exos import flip, peach
 >>> is_string = partial(flip(isinstance), str)
->>> each(print, filter(is_string, ['forty two', 42, True, '', 'done']))
+>>> peach(filter(is_string, ['forty two', 42, True, '', 'done']))
 forty two
 
 done
