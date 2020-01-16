@@ -98,7 +98,8 @@ def xattr(obj, attr, default=XAttrNoDefault):
     1.618
     """
     return reduce(
-        getattr if default is XAttrNoDefault else lambda acc, curr: getattr(acc, curr, default),
+        getattr if default is XAttrNoDefault else
+        lambda acc, curr: getattr(acc, curr, default),
         attr.split('.'),
         obj
     )
@@ -235,7 +236,7 @@ def setattrs(obj, *args, **kwargs):
     """
     attrs = extend(*args, kwargs)
     return reduce(
-        lambda acc, curr: setattr_(acc, *curr), # curr <- (k, v)
+        lambda acc, curr: setattr_(acc, *curr),  # curr <- (k, v)
         attrs.items(),
         obj
     )

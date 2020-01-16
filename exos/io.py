@@ -17,8 +17,9 @@ def each(accept, iterable, *args, **kwargs):
         _ = [method(*args, **kwargs) for method in methods]
         return
 
+    unpack = kwargs.get('_unpack', False)
     _ = (
-        [accept(item) for item in iterable] if not kwargs.get('_unpack', False) else
+        [accept(item) for item in iterable] if not unpack else
         [accept(*item) for item in iterable]
     )
 

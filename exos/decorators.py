@@ -16,10 +16,10 @@ def curry(fn):
     """
     Decorator for currying functions.
     >>> @curry
-    ... def volume(a, b, c):
+    ... def p(a, b, c):
     ...     return a*b*c
     ...
-    >>> volume(1,2,3) == volume(1)(2)(3) == volume(1,2)(3) == volume(1)(2,3) == 6
+    >>> p(1,2,3) == p(1)(2)(3) == p(1,2)(3) == p(1)(2,3) == 6
     """
     _args = getfullargspec(fn).args
 
