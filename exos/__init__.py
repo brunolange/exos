@@ -217,3 +217,25 @@ def pipe(*fns):
     """
     return reduce(flip(_compose), fns, Identity)
 
+
+def setattr_(obj, name, value):
+    """Similar to setattr except it returns back the modified object.
+    """
+    setattr(obj, name, value)
+    return obj
+
+
+def setattrs(obj, *args, **kwargs):
+    """Allows for multiple attributes to be set from dictionaries
+    passed as positional arguments or named parameters.
+    >>> setattrs(car, {'make': 'Jeep', 'model': 'Patriot'}, year=2011)
+    <__main__.Car object at 0x103331320>
+    >>> car.make, car.model, car.year
+    ('Jeep', 'Patriot', 2011)
+    """
+    attrs = extend(*args, kwargs)
+    return reduce(
+        lambda acc, curr: setattr_(acc, *curr), # curr <- (k, v)
+        attrs.items(),
+        obj
+    )
