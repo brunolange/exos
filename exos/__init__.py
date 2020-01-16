@@ -193,7 +193,7 @@ def reduce_right(fold, xs, x0):
 
 class Identity:
     """Utility class for the composition function.
-    Acts as a placeholder for the initial value for the reduction functions
+    Acts as a placeholder for the initial value of the reduction functions
     """
     pass
 
