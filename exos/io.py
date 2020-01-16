@@ -41,6 +41,7 @@ def print_each(xs, prefix=''):
         enumerate(xs)
     )
 
+
 def peach(xs, prefix=''):
     """
     A shortcut to print_each
