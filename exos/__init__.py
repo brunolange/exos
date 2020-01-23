@@ -6,7 +6,7 @@ from functools import partial, reduce
 from operator import iconcat
 from inspect import getfullargspec
 from .io import each, ueach, print_each, peach
-from .decorators import curry, memoize
+from .decorators import curry, memoize, fattr
 from .exceptions import NonExhaustivePattern
 from .utils import pairs
 

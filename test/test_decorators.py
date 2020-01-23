@@ -1,6 +1,6 @@
 import unittest
 
-from exos import curry
+from exos import curry, memoize, fattr
 
 
 class TestDecorators(unittest.TestCase):
@@ -21,4 +21,13 @@ class TestDecorators(unittest.TestCase):
         # pylint: disable=not-callable
         self.assertEqual(cfoo('bar'), 'foobar')
 
+    # pylint: disable=no-member
+    def test_memoize(self):
+        @memoize
+        @fattr('counter', 0)
+        def fibo(n):
+            fibo.counter += 1
+            return 1 if n <= 2 else fibo(n-1) + fibo(n-2)
 
+        self.assertEqual(fibo(100), 354224848179261915075)
+        self.assertEqual(fibo.counter, 100)
