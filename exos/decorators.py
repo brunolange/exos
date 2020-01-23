@@ -21,12 +21,13 @@ def curry(fn):
     ...
     >>> p(1,2,3) == p(1)(2)(3) == p(1,2)(3) == p(1)(2,3) == 6
     """
-    _args = getfullargspec(fn).args
+    spec = getfullargspec(fn)
+    arity = len(spec.args) - len(spec.defaults or ())
 
     @wraps(fn)
     def curried(*args, **kwargs):
         return (
-            fn(*args, **kwargs) if len(_args) - len(args) == 0 else
+            fn(*args, **kwargs) if arity - len(args) == 0 else
             curry(partial(fn, *args, **kwargs))
         )
     return curried
