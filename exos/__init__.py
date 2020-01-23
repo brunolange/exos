@@ -119,18 +119,25 @@ def mmethod(path, *args, **kwargs):
     Returns a mapper function that runs the path method for each instance of
     the iterable collection.
 
-    mmethod('start')
-    <=>
-    lambda thread: thread.start()
+    >>> mmethod('start')
+    is equivalent to
+    >>> lambda thread: thread.start()
 
-    mmethod('book_set.filter', number_of_pages__gte=100)
-    <=>
-    lambda author: author.book_set.filter(number_of_pages__gte=100)
+    >>> mmethod('book_set.filter', number_of_pages__gte=100)
+    is equivalent to
+    >>> lambda author: author.book_set.filter(number_of_pages__gte=100)
     """
     return lambda x: mattr(path)(x)(*args, **kwargs)
 
 
 def map_method(path, iterable):
+    """
+    Returns a map object in which each item corresponds to the method
+    given by `path` called on the objects in the iterable collection.
+    >>> map('magnitude', [v1, v2, v3])
+    is equivalent to
+    >>> map(lambda v: v.magnitude(), [v1, v2, v3])
+    """
     return map(mmethod(path), iterable)
 
 
