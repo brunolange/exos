@@ -248,6 +248,7 @@ def setattrs(obj, *args, **kwargs):
         obj
     )
 
+
 def take(n, collection):
     """Returns at most n items from the collection in a list
     >>> take(4, range(100000, 1000000, 4))
@@ -256,6 +257,7 @@ def take(n, collection):
     ['hello', 'world']
     """
     return [item for item, _ in zip(collection, range(n))]
+
 
 def take_while(predicate, collection):
     """Returns a list corresponding to the longest prefix
