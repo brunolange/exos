@@ -256,3 +256,17 @@ def take(n, collection):
     ['hello', 'world']
     """
     return [item for item, _ in zip(collection, range(n))]
+
+def take_while(predicate, collection):
+    """Returns a list corresponding to the longest prefix
+    of the original list for which all the values when
+    tested against the given predicate return True
+    >>> take_while(lambda x: x<=10, range(10000))
+    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    """
+    payload = []
+    for item in collection:
+        if not predicate(item):
+            break
+        payload.append(item)
+    return payload
