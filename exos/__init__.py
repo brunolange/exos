@@ -247,3 +247,19 @@ def setattrs(obj, *args, **kwargs):
         attrs.items(),
         obj
     )
+
+def take(n, collection):
+    """Returns at most n items from the collection in a list
+    >>> take(4, range(100000, 1000000, 4))
+    [100000, 100004, 100008, 100012]
+    >>> take(10, ['hello', 'world'])
+    ['hello', 'world']
+    """
+    iterator = iter(collection)
+    payload = []
+    for _ in range(n):
+        try:
+            payload.append(next(iterator))
+        except StopIteration:
+            break
+    return payload
