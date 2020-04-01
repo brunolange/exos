@@ -255,11 +255,4 @@ def take(n, collection):
     >>> take(10, ['hello', 'world'])
     ['hello', 'world']
     """
-    iterator = iter(collection)
-    payload = []
-    for _ in range(n):
-        try:
-            payload.append(next(iterator))
-        except StopIteration:
-            break
-    return payload
+    return [item for item, _ in zip(collection, range(n))]
