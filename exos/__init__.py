@@ -2,12 +2,14 @@
 EXpressions Over Statements: extended functional tools in Python.
 """
 
+import threading
 from functools import partial, reduce
-from operator import iconcat
 from inspect import getfullargspec
-from .io import each, ueach, print_each, peach
-from .decorators import curry, memoize, fattr
+from operator import iconcat
+
+from .decorators import curry, fattr, memoize
 from .exceptions import NonExhaustivePattern
+from .io import each, peach, print_each, ueach
 from .utils import pairs
 
 __author__ = 'Bruno Lange'
@@ -271,4 +273,28 @@ def take_while(predicate, collection):
         if not predicate(item):
             break
         payload.append(item)
+    return payload
+
+
+def tmap(fn, collection):
+    """Concurrent map. Map each item in the collection with
+    the provided function in a separate thread.
+    `tmap` can drastically improve performance when compared to
+    `map` but should only be used for IO-bound functions that have
+    no side effects.
+    >>> tmap(download, urls)
+    [<url1_data>, <url2_data>, <url3_data>]
+    >>> datasets = tmap(read_csv, files)
+    """
+    n = len(collection)
+    payload = [None]*n
+
+    def process(i):
+        payload[i] = fn(collection[i])
+
+    threads = [threading.Thread(target=process, args=(i,)) for i in range(n)]
+
+    each('start', threads)
+    each('join', threads)
+
     return payload
