@@ -298,3 +298,14 @@ def tmap(fn, collection):
     each('join', threads)
 
     return payload
+
+
+def teach(fn, collection):
+    """Concurrently digest each item in the collection with
+    the provided function.
+    >>> tmap(save_to_disk, documents)
+    """
+    threads = [threading.Thread(target=fn, args=(item,)) for item in collection]
+
+    each('start', threads)
+    each('join', threads)
