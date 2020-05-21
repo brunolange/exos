@@ -178,7 +178,7 @@ def zip_with_attr(iterable, *attrs):
     """
 
     return zip(iterable, *(
-        tuple(reduce(getattr, attr.split('.'), item) for item in iterable)
+        tuple(xattr(item, attr) for item in iterable)
         for attr in attrs
     ))
 
