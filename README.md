@@ -1,4 +1,4 @@
-# `exos` | expressions over statements
+# `exos` expressions over statements
 
 exos is a Python package that expands the functional programming toolset in Python 3.
 
