@@ -12,6 +12,34 @@ $ pip install exos
 
 ## Documentation
 
+### `curry`
+
+The bread and butter of functional programming, *currying* allows you to provide
+a function with an incomplete set of arguments, getting in return a partially
+applied function.
+
+```python
+>>> def volume(height, width, depth):
+...     return height * width * depth
+...
+>>> volume(1, 4)
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+TypeError: volume() missing 1 required positional argument: 'depth'
+>>>
+>>> from exos import curry
+>>> @curry
+... def volume(height, width, depth):
+...     return height * width * depth
+...
+>>> volume(2, 3)
+>>> <function curry.<locals>.curried at 0x102920e18>
+>>> volume(1,2,3) == volume(1)(2)(3) == volume(1,2)(3) == volume(1)(2,3) == 6
+True
+>>> list(map(volume(0.5, 2.25), range(1, 10)))
+[1.125, 2.25, 3.375, 4.5, 5.625, 6.75, 7.875, 9.0, 10.125]
+```
+
 ### `memoize`
 
 In functional programming lingo, *referential transparency* is a term that refers
@@ -48,34 +76,6 @@ automatic caching.
 >>> timeit.repeat("fibo(30)", "from __main__ import fibo", number=3)
 [4.720499964605551e-05, 8.240000170189887e-06, 7.680000180698698e-06]
 >>> # blazing fast!
-```
-
-### `curry`
-
-The bread and butter of functional programming, *currying* allows you to provide
-a function with an incomplete set of arguments, getting in return a partially
-applied function.
-
-```python
->>> def volume(height, width, depth):
-...     return height * width * depth
-...
->>> volume(1, 4)
-Traceback (most recent call last):
-  File "<stdin>", line 1, in <module>
-TypeError: volume() missing 1 required positional argument: 'depth'
->>>
->>> from exos import curry
->>> @curry
-... def volume(height, width, depth):
-...     return height * width * depth
-...
->>> volume(2, 3)
->>> <function curry.<locals>.curried at 0x102920e18>
->>> volume(1,2,3) == volume(1)(2)(3) == volume(1,2)(3) == volume(1)(2,3) == 6
-True
->>> list(map(volume(0.5, 2.25), range(1, 10)))
-[1.125, 2.25, 3.375, 4.5, 5.625, 6.75, 7.875, 9.0, 10.125]
 ```
 
 ### `compose`
@@ -161,7 +161,7 @@ Flattens a nested collection.
 ```
 
 ### `when`
-`when` is the declarative version of a switch statement.
+`when` is a declarative version of a switch statement.
 
 ```python
 from exos import when
