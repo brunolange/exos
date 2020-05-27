@@ -1,10 +1,10 @@
 # `exos` | expressions over statements
 
-exos is a Python module containing varied functional tools.
+exos is a Python package that expands the functional programming toolset in Python 3.
 
 ## Installation
 
-`exos` is compatible with Python 3. Install it with `pip`:
+Install it with `pip`:
 
 ```bash
 $ pip install exos
