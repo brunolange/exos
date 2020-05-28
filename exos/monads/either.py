@@ -16,6 +16,9 @@ class Either(Monad):
     def __init__(self, value):
         self.value = value
 
+    def __str__(self):
+        return f'{type(self).__name__} {self.value}'
+
 class Left(Either):
     def bind(self, _):
         return Left(self.value)
