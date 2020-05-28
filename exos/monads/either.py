@@ -5,8 +5,8 @@ __author__ = 'Bruno Lange'
 __email__ = 'blangeram@gmail.com'
 __license__ = 'MIT'
 
-from abc import abstractmethod
 import operator
+from abc import abstractmethod
 
 from . import Monad
 
@@ -19,9 +19,11 @@ class Either(Monad):
     def __str__(self):
         return f'{type(self).__name__} {self.value}'
 
+
 class Left(Either):
     def bind(self, _):
         return Left(self.value)
+
 
 class Right(Either):
     def bind(self, fn):
