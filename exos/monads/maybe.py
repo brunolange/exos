@@ -24,7 +24,7 @@ class Just(Maybe):
 
 
     def __str__(self):
-        return f'Just {self.value}'
+        return 'Just {}'.format(self.value)
 
 
 class _Nothing(Maybe):
@@ -33,6 +33,6 @@ class _Nothing(Maybe):
 
 
     def __str__(self):
-        return f'Nothing'
+        return 'Nothing'
 
 Nothing = _Nothing()

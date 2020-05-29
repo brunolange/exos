@@ -23,7 +23,6 @@ def each(accept, iterable, *args, **kwargs):
         [accept(*item) for item in iterable]
     )
 
-
 def ueach(accept, iterable, *args, **kwargs):
     """
     Unpacks elements in the collection before applying the accept function.

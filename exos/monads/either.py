@@ -17,7 +17,7 @@ class Either(Monad):
         self.value = value
 
     def __str__(self):
-        return f'{type(self).__name__} {self.value}'
+        return '{] {}'.format(type(self).__name__,  self.value)
 
 
 class Left(Either):
