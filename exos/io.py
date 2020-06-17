@@ -18,10 +18,10 @@ def each(accept, iterable, *args, **kwargs):
         return
 
     unpack = kwargs.get('_unpack', False)
-    _ = (
-        [accept(item) for item in iterable] if not unpack else
-        [accept(*item) for item in iterable]
-    )
+    for item in iterable:
+        _args = (item,) if not unpack else item
+        accept(*_args)
+
 
 def ueach(accept, iterable, *args, **kwargs):
     """

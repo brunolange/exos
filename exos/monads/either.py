@@ -12,6 +12,7 @@ from . import Monad
 
 EITHER_XOR = 'Either requires either a left or a right value'
 
+
 class Either(Monad):
     def __init__(self, value):
         self.value = value
