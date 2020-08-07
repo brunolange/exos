@@ -2,9 +2,9 @@
 stateful functions
 """
 
-__author__ = 'Bruno Lange'
-__email__ = 'blangeram@gmail.com'
-__license__ = 'MIT'
+__author__ = "Bruno Lange"
+__email__ = "blangeram@gmail.com"
+__license__ = "MIT"
 
 
 def each(accept, iterable, *args, **kwargs):
@@ -17,7 +17,7 @@ def each(accept, iterable, *args, **kwargs):
         _ = [method(*args, **kwargs) for method in methods]
         return
 
-    unpack = kwargs.get('_unpack', False)
+    unpack = kwargs.get("_unpack", False)
     for item in iterable:
         _args = (item,) if not unpack else item
         accept(*_args)
@@ -27,21 +27,20 @@ def ueach(accept, iterable, *args, **kwargs):
     """
     Unpacks elements in the collection before applying the accept function.
     """
-    kwargs['_unpack'] = True
+    kwargs["_unpack"] = True
     each(accept, iterable, *args, **kwargs)
 
 
-def print_each(xs, prefix=''):
+def print_each(xs, prefix=""):
     """
     Prints each element in the collection given by xs.
     """
     return ueach(
-        lambda i, x: print('{}{}'.format(prefix.format(i=i), x)),
-        enumerate(xs)
+        lambda i, x: print("{}{}".format(prefix.format(i=i), x)), enumerate(xs)
     )
 
 
-def peach(xs, prefix=''):
+def peach(xs, prefix=""):
     """
     A shortcut to print_each
     """

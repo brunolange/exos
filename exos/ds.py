@@ -5,9 +5,9 @@ Data structures
 from collections import defaultdict
 
 
-__author__ = 'Bruno Lange'
-__email__ = 'blangeram@gmail.com'
-__license__ = 'MIT'
+__author__ = "Bruno Lange"
+__email__ = "blangeram@gmail.com"
+__license__ = "MIT"
 
 
 def multimap(depth, callable):

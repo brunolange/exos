@@ -4,9 +4,9 @@ utility functions and classes
 
 from functools import reduce
 
-__author__ = 'Bruno Lange'
-__email__ = 'blangeram@gmail.com'
-__license__ = 'MIT'
+__author__ = "Bruno Lange"
+__email__ = "blangeram@gmail.com"
+__license__ = "MIT"
 
 
 def pairs(*args):
@@ -16,6 +16,7 @@ def pairs(*args):
         else:
             acc.append([curr])
         return acc
+
     return reduce(fold, args, [[]])
 
 
@@ -24,8 +25,9 @@ class hashabledict(dict):
     A hashable dicitionary that comes with the cost of immutability.
     Any attempts to modify it after its inception yields a RunTimeError
     """
+
     def __readonly__(self, *args, **kwargs):
-        raise RuntimeError('Cannot modify hashabledict')
+        raise RuntimeError("Cannot modify hashabledict")
 
     __setitem__ = __readonly__
     __delitem__ = __readonly__

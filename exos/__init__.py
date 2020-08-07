@@ -12,9 +12,9 @@ from .exceptions import NonExhaustivePattern
 from .io import each, peach, print_each, ueach
 from .utils import pairs
 
-__author__ = 'Bruno Lange'
-__email__ = 'blangeram@gmail.com'
-__license__ = 'MIT'
+__author__ = "Bruno Lange"
+__email__ = "blangeram@gmail.com"
+__license__ = "MIT"
 
 
 def when(*args):
@@ -80,7 +80,7 @@ def mattr(attr):
     mattr('user') <=> lambda account: account.user
     mattr('user.email') <=> lambda account: account.user.email
     """
-    return partial(reduce, getattr, attr.split('.'))
+    return partial(reduce, getattr, attr.split("."))
 
 
 class XAttrNoDefault:
@@ -177,10 +177,9 @@ def zip_with_attr(iterable, *attrs):
     zip_with_attr(cars, 'price')
     """
 
-    return zip(iterable, *(
-        tuple(xattr(item, attr) for item in iterable)
-        for attr in attrs
-    ))
+    return zip(
+        iterable, *(tuple(xattr(item, attr) for item in iterable) for attr in attrs)
+    )
 
 
 def extend(*dicts):
@@ -188,9 +187,11 @@ def extend(*dicts):
     Returns a dictionary that combines all dictionaries passed as arguments
     without mutating any of them.
     """
+
     def fold(acc, curr):
         acc.update(curr)
         return acc
+
     return reduce(fold, dicts, {})
 
 
@@ -205,12 +206,12 @@ class Identity:
     """Utility class for the composition function.
     Acts as a placeholder for the initial value of the reduction functions
     """
+
     pass
 
 
 _compose = lambda f, g: (
-    f if g is Identity else
-    lambda *args, **kwargs: f(g(*args, **kwargs))
+    f if g is Identity else lambda *args, **kwargs: f(g(*args, **kwargs))
 )
 
 
@@ -287,15 +288,15 @@ def tmap(fn, collection):
     >>> datasets = tmap(read_csv, files)
     """
     n = len(collection)
-    payload = [None]*n
+    payload = [None] * n
 
     def process(i):
         payload[i] = fn(collection[i])
 
     threads = [threading.Thread(target=process, args=(i,)) for i in range(n)]
 
-    each('start', threads)
-    each('join', threads)
+    each("start", threads)
+    each("join", threads)
 
     return payload
 
@@ -307,5 +308,5 @@ def teach(fn, collection):
     """
     threads = [threading.Thread(target=fn, args=(item,)) for item in collection]
 
-    each('start', threads)
-    each('join', threads)
+    each("start", threads)
+    each("join", threads)
