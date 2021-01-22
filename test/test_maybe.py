@@ -10,7 +10,7 @@ class TestMaybe(unittest.TestCase):
     def test_just(self):
         n = Just(42)
         self.assertTrue(isinstance(n, Maybe))
-        self.assertEquals(n.value, 42)
+        self.assertEqual(n.value, 42)
 
     def test_bind(self):
         self.assertEqual(Just(6).bind(lambda x: x*7), Just(42))
