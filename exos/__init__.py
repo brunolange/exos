@@ -182,6 +182,23 @@ def zip_with_attr(iterable, *attrs):
     )
 
 
+def unpack(iterable, *attrs):
+    """Unpacks the iterable in parity with the attributes passed.
+    ```
+    >>> @dataclass
+    ... class Point:
+    ...     u: float
+    ...     v: float
+    ...
+    >>> points: List[Point] = get_points()
+    >>> for u, v in unpack(points, "u", "v"):
+    ...     print(u, v)
+    ```
+    """
+    for x in iterable:
+        yield tuple(getattr(x, a) for a in attrs)
+
+
 def extend(*dicts):
     """
     Returns a dictionary that combines all dictionaries passed as arguments
