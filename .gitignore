@@ -3,6 +3,7 @@ __pycache__
 dist/
 *.egg-info
 .pyenv/
+.venv/
 build/
 .vscode/
 .pytest_cache/
